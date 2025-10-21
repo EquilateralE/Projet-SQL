@@ -147,3 +147,11 @@ LEFT JOIN agent ag ON ag.id_agence = a.id_agence
 LEFT JOIN capteur c ON c.id_ville = v.id_ville
 GROUP BY r.id_region, r.nom_region
 HAVING COUNT(DISTINCT c.id_capteur) > COUNT(DISTINCT ag.id_agent);
+
+-- Création de l'utilisateur demandé --
+CREATE USER 'utilisateur_normal'@'localhost' IDENTIFIED BY 'motdepasse123';
+
+GRANT SELECT, INSERT ON cleardata.* TO 'utilisateur_normal'@'localhost';
+CREATE USER 'admin_cleardata'@'localhost' IDENTIFIED BY 'adminsecure123';
+
+GRANT ALL PRIVILEGES ON cleardata.* TO 'admin_cleardata'@'localhost' WITH GRANT OPTION;
